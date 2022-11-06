@@ -25,8 +25,8 @@ router.get('/', (req, res) => {
                 }
             ]
         })
-        .then(dbPostData => {
-            const posts = dbPostData.map(post => post.get({ plain: true }));
+        .then(PostData => {
+            const posts = PostData.map(post => post.get({ plain: true }));
             res.render('homepage', { posts, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
@@ -75,12 +75,12 @@ router.get('/post/:id', (req, res) => {
         }
       ]
     })
-    .then(dbPostData => {
-        if(!dbPostData) {
+    .then(PostData => {
+        if(!PostData) {
             res.status(404).json({messgae: 'No post found with this id'});
             return;
         }
-        const post = dbPostData.get({plain: true});
+        const post = PostData.get({plain: true});
         console.log(post);
         res.render('single-post', {post, loggedIn: req.session.loggedIn});
     })
@@ -116,12 +116,12 @@ router.get('/post-comments', (req, res) => {
         }
       ]
     })
-    .then(dbPostData => {
-        if(!dbPostData) {
+    .then(PostData => {
+        if(!PostData) {
             res.status(404).json({messgae: 'No post found with this id'});
             return;
         }
-        const post = dbPostData.get({plain: true});
+        const post = PostData.get({plain: true});
         res.render('post-comments', {post, loggedIn: req.session.loggedIn});
     })
     .catch(err => {
