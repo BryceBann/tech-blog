@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 class Post extends Model {}
 
-postMessage.init(
+Post.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -30,5 +30,14 @@ postMessage.init(
             }
         }
 
-    }
-)
+    },
+    { 
+        sequelize,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'post'
+      }
+    );
+    
+    module.exports = Post;
+    
