@@ -40,25 +40,23 @@ router.post('/', withAuth, (req, res) => {
     }
 });
 
-router.put('/:id', withAuth, (req, res) => {
-    Comment.update({
-        comment_text: req.body.comment_text
-    })},
-     {
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(dbCommentData => {
-        if (!dbCommentData) {
-            res.status(404).json({ message: 'No comment found with this id' });
-            return;
-        }
-        res.json(dbCommentData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
+    router.put('/:id', withAuth, (req, res) => {
+        Comment.update({
+            comment_text: req.body.comment_text
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(CommentData => {
+            if (!CommentData) {
+                res.status(404).json({ message: 'No comment found with this id' });
+                return;
+            }
+            res.json(CommentData);
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
     });
 
 router.delete(':id', withAuth, (req, res) => {
