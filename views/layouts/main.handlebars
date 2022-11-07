@@ -9,24 +9,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
+
 <body>
     <div class="container-md text-center">
+       <header class="row">
+        <h2><a class="logo" href="/">The tech blog</a></h2>
+        <nav>
+            <ul class="navbar">
+                <li><a class="link" href="/">Home</a></li>
+                <li><a class="link" href="../dashboard.handlebars">dashboard</a></li>
+                {{#if logged_in}}
+                <li><a class="link" href="/" id="logout">Logout</a></li>
+                {{else}}
+                <li><a class="link" href="../login.handlebars">Login</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+       </header>
+
+       <main>
+        {{{body}}}
+       </main>
+
+       <footer class="footer">
         <div class="row">
-            <div class="col">
-                <h4>Top of page</h4>
-            </div>
+            <p>The tech blog by:<a href="https://github.com/BryceBann">Bryce Bann</a></p>
         </div>
-
-        <div class="row">
-            <div class="col">
-                <h4>should be working</h4>
-            </div>
-        </div>
-    </div>
-    
-
-
+       </footer>
+   
+    {{#if logged_in}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script src="js/logout.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+ {{/if}}
+ </div>
 </body>
 </html>
