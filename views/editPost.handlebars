@@ -1,0 +1,17 @@
+<h3 class="card-header">Edit tech post</h3>
+<form class="card-body edit-post-form">
+    <div class="form-row">
+        <label for="postTitle" class="form-label">Title</label>
+        <input name="postTitle" type="text" value="{{post.title}}" class="form-input form-control"/>
+    </div>
+
+    <div class="form-row">
+        <label for="post" class="form-label">Tech post</label>
+        <input name="post" type="text" value="{{post.textBody}}" class="form-input form-control"/>
+    </div>
+    <button type="submit" class="btn">Update tech post</button>
+    <button type="button" class="delete-post-btn btn">Delete tech post</button>
+</form> 
+
+<script src="../public/js/editPost.js"></script>
+<script src="../public/js/deletePost.js"></script>

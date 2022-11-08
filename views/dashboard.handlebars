@@ -1,0 +1,14 @@
+<h3>Your tech post</h3>
+
+<button type="submit" class="btn new-post-button"><a class="link" href="/dashboard/new">+ New tech post</a></button>
+<section>
+    {{#if post.length}}
+
+     {{#each post as |post|}}
+     {{>dashboardPostInfo post}}
+     {{/each}}
+
+     {{/if}}
+</section>
+
+<script src="/public/js/addPost.js"></script>
