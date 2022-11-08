@@ -5,7 +5,7 @@ const dashBoard = require('./dashboradRoutes')
 
 router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
-router.use('/dashBoard', dashBoard);
+router.use('/dashboard', dashBoard);
 router.use((req, res) => {
     res.status(404).end();
 });
