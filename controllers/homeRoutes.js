@@ -8,21 +8,20 @@ router.get('/', (req, res) => {
             attributes: [
                 'id',
                 'title',
-                'content',
-                'created_at'
+                'textBody'
             ],
             include: [{
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+                    // include: {
+                    //     model: User,
+                    //     attributes: ['username']
+                    // }
                 },
-                {
-                    model: User,
-                    attributes: ['username']
-                }
+                // {
+                //     model: User,
+                //     attributes: ['username']
+                // }
             ]
         })
         .then(PostData => {
@@ -51,28 +50,27 @@ router.get('/signup', (req, res) => {
 
 //add explanation
 router.get('/post/:id', (req, res) => {
-    post.findOne({
+    Post.findOne({
         where: {
             id: req.params.id
         },
         attributes: [
             'id',
-            'content',
-            'title',
-            'created_at'
+            'textBody',
+            'title'
         ],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+            // include: {
+            //     model: User,
+            //     attributes: ['username']
+            // }
         },
-        {
-            model: User,
-            attributes: ['username']
-        }
+        // {
+        //     model: User,
+        //     attributes: ['username']
+        // }
       ]
     })
     .then(PostData => {
@@ -92,28 +90,27 @@ router.get('/post/:id', (req, res) => {
 
 //add explanation
 router.get('/post-comments', (req, res) => {
-    post.findOne({
+    Post.findOne({
         where: {
             id: req.params.id
         },
         attributes: [
             'id',
-            'content',
-            'title',
-            'created_at'
+            'textBody',
+            'title'
         ],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_id'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+            // include: {
+            //     model: User,
+            //     attributes: ['username']
+            // }
         },
-        {
-            model: User,
-            attributes: ['username']
-        }
+        // {
+        //     model: User,
+        //     attributes: ['username']
+        // }
       ]
     })
     .then(PostData => {

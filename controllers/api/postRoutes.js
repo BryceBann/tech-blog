@@ -4,11 +4,10 @@ const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
-    post.findAll({
+    Post.findAll({
         attributes: ['id',
         'title',
-        'content',
-        'created_at'
+        'textBody'
     ],
     order: [
         ['created_at', 'DESC']
@@ -19,11 +18,11 @@ router.get('/', (req, res) => {
     },
     {
         model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        include: {
-            model: User,
-            attributes: ['username']
-      }
+        attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+    //     include: {
+    //         model: User,
+    //         attributes: ['username']
+    //   }
     }
   ]
 })
@@ -40,9 +39,8 @@ router.get('/', (req, res) => {
                 id: req.params.id
             },
             attributes: ['id',
-                'content',
-                'title',
-                'created_at'
+                'textBody',
+                'title'
             ],
             include: [{
                     model: User,
@@ -50,11 +48,11 @@ router.get('/', (req, res) => {
                 },
                 {
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+                    // include: {
+                    //     model: User,
+                    //     attributes: ['username']
+                    // }
                 }
             ]
         })

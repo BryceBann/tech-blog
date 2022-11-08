@@ -4,28 +4,27 @@ const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
-    post.findAll({
+    Post.findAll({
         where: {
             user_id: req.session.user_id
         },
         attributes: [
             'id',
             'title',
-            'content',
-            'created_at'
+            'textBody'
         ],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
             include: {
                 model: User,
                 attributes: ['username']
             }
         },
-        {
-            model: User,
-            attributes: ["username"]
-        }
+        // {
+        //     model: User,
+        //     attributes: ["username"]
+        // }
     ]
     })
     .then(PostData => {
@@ -40,15 +39,14 @@ router.get('/', withAuth, (req, res) => {
 
 
 router.get('/edit/:id', withAuth, (req, res) => {
-    post.findAll({
+    Post.findAll({
         where: {
             id: req.params.id
         },
         attributes: [
             'id',
             'title',
-            'content',
-            'created_id'
+            'textBody'
         ],
         include: [{
             model: User,
@@ -56,11 +54,11 @@ router.get('/edit/:id', withAuth, (req, res) => {
         },
         {
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+            // include: {
+            //     model: User,
+            //     attributes: ['username']
+            // }
         }
     ]
     })
