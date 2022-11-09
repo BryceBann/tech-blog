@@ -18,8 +18,8 @@ async function signupHandler(event) {
             headers: {'content-Type': 'application/json'}
         });
         if(signup.ok) {
-            console.log('yoyu are now signed up');
-            document.location.replace('/dashBoard');
+            console.log('you are now signed up');
+            document.location.replace('/dashboard');
         }else{
             alert(response.statusText);
         }

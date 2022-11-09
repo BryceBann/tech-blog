@@ -2,7 +2,7 @@ const sequlize = require('../config/connection');
 const {Post, User, Comment} = require('../models');
 const router = require('express').Router();
 
-//add explanation
+
 router.get('/', (req, res) => {
     Post.findAll({
             attributes: [
@@ -13,15 +13,7 @@ router.get('/', (req, res) => {
             include: [{
                     model: Comment,
                     attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-                    // include: {
-                    //     model: User,
-                    //     attributes: ['username']
-                    // }
-                },
-                // {
-                //     model: User,
-                //     attributes: ['username']
-                // }
+                }
             ]
         })
         .then(PostData => {
@@ -34,7 +26,7 @@ router.get('/', (req, res) => {
         });
 });
 
-//add explanation
+
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -43,12 +35,12 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-//add explanation
+
 router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-//add explanation
+
 router.get('/post/:id', (req, res) => {
     Post.findOne({
         where: {
@@ -62,15 +54,7 @@ router.get('/post/:id', (req, res) => {
         include: [{
             model: Comment,
             attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-            // include: {
-            //     model: User,
-            //     attributes: ['username']
-            // }
-        },
-        // {
-        //     model: User,
-        //     attributes: ['username']
-        // }
+        }
       ]
     })
     .then(PostData => {
@@ -88,7 +72,6 @@ router.get('/post/:id', (req, res) => {
     });
 });
 
-//add explanation
 router.get('/post-comments', (req, res) => {
     Post.findOne({
         where: {
@@ -102,15 +85,7 @@ router.get('/post-comments', (req, res) => {
         include: [{
             model: Comment,
             attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-            // include: {
-            //     model: User,
-            //     attributes: ['username']
-            // }
-        },
-        // {
-        //     model: User,
-        //     attributes: ['username']
-        // }
+        }
       ]
     })
     .then(PostData => {

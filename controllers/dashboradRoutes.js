@@ -20,11 +20,7 @@ router.get('/', withAuth, (req, res) => {
                 model: User,
                 attributes: ['username']
             }
-        },
-        // {
-        //     model: User,
-        //     attributes: ["username"]
-        // }
+        }
     ]
     })
     .then(PostData => {
@@ -55,10 +51,6 @@ router.get('/edit/:id', withAuth, (req, res) => {
         {
             model: Comment,
             attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-            // include: {
-            //     model: User,
-            //     attributes: ['username']
-            // }
         }
     ]
     })
