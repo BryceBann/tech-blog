@@ -1,19 +1,19 @@
 const { Post } = require('../models');
 
 const postData = [{
-        title: 'why wont this page work',
-        textBody: 'The amount of time was very not cool ',
+        title: 'why is tech so hard',
+        textBody: 'because it always changes',
         user_id: 1
 
     },
     {
-        title: 'Boooooooo',
-        textBody: 'i wanna cry',
+        title: 'new update already ',
+        textBody: 'see the new changes',
         user_id: 2
     },
     {
-        title: 'Like a whole river',
-        textBody: 'what is going on with this shit',
+        title: 'cherry keyboards are now in',
+        textBody: 'with all the fast typing and loud clicks',
         user_id: 3
     }
 ];
