@@ -14,7 +14,7 @@ const response = await fetch(`/api/posts/${id}`, {
         textContent
     }),
     headers: {
-        'content-Type': 'application/json'
+        'Content-Type': 'application/json'
     }
 });
 

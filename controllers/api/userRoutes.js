@@ -78,35 +78,36 @@ router.post('/', (req, res) => {
         });
 });
 
-router.post('/login', (req, res) => {
-    User.findOne({
+router.post('/login', async (req, res) => {
+    try {
+        const userData = await User.findOne({
             where: {
-                username: req.body.username
+                email: req.body.email
             }
-        }).then(UserData => {
-            if (!UserData) {
-                res.status(400).json({ message: 'No user with that username!' });
-                return;
-            }
-            const validPassword = UserData.checkPassword(req.body.password);
-
-            if (!validPassword) {
-                res.status(400).json({ message: 'Incorrect password!' });
-                return;
-            }
-            req.session.save(() => {
-
-                req.session.user_id = UserData.id;
-                req.session.username = UserData.username;
-                req.session.loggedIn = true;
-
-                res.json({ user: UserData, message: 'You are now logged in!' });
-            });
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+
+        if(!userData) {
+            res.status(400).json({message:'Incorrect username. Please try again.'});
+            return;
+        }
+
+        const validPassword = await userData.checkPassword(req.body.password);
+
+        if(!validPassword) {
+            res.status(400).json({message: 'Incorrect password. Please try again.'});
+            return;
+        }
+        
+        req.session.save(() => {
+            req.session.user_id = userData.id;
+            req.session.logged_in = true;
+
+            res.status(200).json({user: userData, message: 'You are now logged in!'})
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
 });
 
 router.post('/logout', (req, res) => {

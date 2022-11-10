@@ -1,17 +1,18 @@
+<div class="login">
 <h3 class="title pb-3">Log In</h3>
-<form id="loginForm" class="card-body">
+<form class="loginForm">
    <div class="form-row">
         <label for="emailLogin" class="form-label">Email</label>
-        <input id="emailLogin" type="text" autofocus="true" class="form-input form-control"/>
+        <input id="emailLogin" type="text" class="form-input form-control"/>
     </div>
 
     <div class="form-row mb-2">
         <label for="passwordLogin" class="form-label">Password</label>
-        <input id="passwordLogin" type="password" autofocus="true" class="form-input form-control"/>
+        <input id="passwordLogin" type="password" class="form-input form-control"/>
     </div>
-    <button type="submit" class="btn">Login</button>
-    <a class="btn login-link" href="/signup">Sign up</a>
+    <button type="submit" class="btn login-btn">Login</button>
+    <a href="/signup" ><button class="btn login-link">Sign up</button></a>
 
 </form>
-
+</div>
 <script src="../public/js/login.js"></script>
