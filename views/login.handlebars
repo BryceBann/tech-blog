@@ -1,6 +1,6 @@
 <div class="login">
 <h3 class="title pb-3">Log In</h3>
-<form class="loginForm">
+<form class="loginForm"> {{!-- action="/auth" ?? --}}
    <div class="form-row">
         <label for="emailLogin" class="form-label">Email</label>
         <input id="emailLogin" type="text" class="form-input form-control"/>
@@ -11,7 +11,7 @@
         <input id="passwordLogin" type="password" class="form-input form-control"/>
     </div>
     <button type="submit" class="btn login-btn">Login</button>
-    <a href="/signup" ><button class="btn login-link">Sign up</button></a>
+    <button class="btn login-link"><a href="/signup" >Sign up</a></button>
 
 </form>
 </div>

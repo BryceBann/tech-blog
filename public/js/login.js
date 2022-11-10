@@ -11,7 +11,7 @@ const loginForm = async (event) => {
                 email,
                 password
             }),
-            header: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json'}
         });
         if(response.ok) {
             console.log('you are now logged in')
