@@ -1,4 +1,4 @@
-async function newPost(event) {
+const newPost = async(event) => {
     event.preventDefault();
 
     const title = document.querySelector('input[name="postTitle"]').value;
@@ -11,7 +11,7 @@ async function newPost(event) {
             textBody
         }),
         headers: {
-            'content-Type': 'application/json'
+            'Content-Type': 'application/json'
         }
     });
 

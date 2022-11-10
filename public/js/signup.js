@@ -1,6 +1,4 @@
-const { response } = require("express");
-
-async function signupHandler(event) {
+const signupHandler = async (event) => {
     event.preventDefault();
 
     const username = document.querySelector('#userNameSignup').value.trim();
@@ -8,16 +6,16 @@ async function signupHandler(event) {
     const password = document.querySelector('#passwordSignup').value.trim();
 
     if(username && email && password) {
-        const signup = await fetch('/api/users', {
+        const response = await fetch('/api/users', {
             method: 'POST',
             body: JSON.stringify({
                 username,
                 email,
                 password
             }),
-            headers: {'content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json'}
         });
-        if(signup.ok) {
+        if(response.ok) {
             console.log('you are now signed up');
             document.location.replace('/dashboard');
         }else{

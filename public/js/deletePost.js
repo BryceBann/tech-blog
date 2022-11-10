@@ -1,9 +1,7 @@
-async function deleteForm(event) {
+const deleteForm = async (event) => {
     event.preventDefault();
 
-    const id = window.location.toString().split('/')[
-        window.location.toString().split('/').length - 1
-    ];
+    const id = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
 
     const response = await fetch(`/api/posts/${id}`, {
         method: 'DELETE',
@@ -11,7 +9,7 @@ async function deleteForm(event) {
             post_id: id
         }),
         headers: {
-            'content-Type': 'application/json'
+            'Content-Type': 'application/json'
         }
     });
     if(response.ok) {
@@ -21,4 +19,4 @@ async function deleteForm(event) {
     }
 }
 
-document.querySelector('.deletePostBtn').addEventListener('submit', deleteForm)
+document.querySelector('.deletePostBtn').addEventListener('click', deleteForm)

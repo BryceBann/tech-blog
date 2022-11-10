@@ -1,14 +1,22 @@
+<div class="dashboard">
+<div class="dash-header">
 <h3>Your tech post</h3>
-
 <button type="submit" class="btn new-post-button"><a class="link" href="/dashboard/new">+ New tech post</a></button>
-<section>
+<a href="/dashboard/new"><button id="newPost" class="btn create-btn">+ New post</button></a>
+</div>
+
     {{#if post.length}}
 
      {{#each post as |post|}}
-     {{>dashboardPostInfo post}}
+     <div class="dashPost">
+     {{>postInfo post}}
+     <a href="/dashboard/edit{{post.id}}"><button class="btn edit-btn">Edit post</button></a>
+     </div>
      {{/each}}
 
+    {{else}}
+    <h3>No post</h3>
      {{/if}}
-</section>
 
+</div>
 <script src="/public/js/addPost.js"></script>

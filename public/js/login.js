@@ -1,19 +1,19 @@
-async function loginForm(event) {
+const loginForm = async (event) => {
     event.preventDefault();
 
-    const username = document.querySelector('usernameLogin').value.trim();
+    const email = document.querySelector('usernameLogin').value.trim();
     const password = document.querySelector('passwordLogin').Value.trim();
 
     if(username && password) {
-        const login = await fetch('/api/user/login', {
-            method: 'post',
+        const response = await fetch('/api/user/login', {
+            method: 'POST',
             body: JSON.stringify({
-                username,
+                email,
                 password
             }),
             header: {'content-Type': 'application/json'}
         });
-        if(login.ok) {
+        if(response.ok) {
             console.log('you are now logged in')
             document.location.replace('/dashboard')
         }else{
