@@ -1,5 +1,5 @@
 const sequlize = require('../config/connection');
-const {Post, User, Comment} = require('../models');
+const { Post, User, Comment } = require('../models');
 const router = require('express').Router();
 
 
@@ -36,9 +36,17 @@ router.get('/login', (req, res) => {
 });
 
 
-router.get('/signup', (req, res) => {
+router.get('/signup', async (req, res) => {
+
+    if(req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+
     res.render('signup');
+    
 });
+
 
 
 router.get('/post/:id', (req, res) => {

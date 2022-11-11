@@ -1,4 +1,4 @@
-const newPost = async(event) => {
+const newPost = async (event) => {
     event.preventDefault();
 
     const title = document.querySelector('input[name="postTitle"]').value;

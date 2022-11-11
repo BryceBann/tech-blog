@@ -25,4 +25,4 @@ const commentForm = async (event) => {
 
 }
 
-document.querySelector('.comment-form').addEventListener('click', commentForm);
+document.querySelector('.comment-form').addEventListener('submit', commentForm);
