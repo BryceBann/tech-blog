@@ -1,38 +1,46 @@
-const sequlize = require('../config/connection');
-const { Post, User, Comment } = require('../models');
 const router = require('express').Router();
+const sequelize= require('../config/connection');
+const { User, Post, Comment } = require('../models');
 
 
-router.get('/', (req, res) => {
-    Post.findAll({
-            attributes: [
-                'id',
-                'title',
-                'textBody'
-            ],
-            include: [{
+router.get('/', async (req, res) => {
+    try {
+        const postData = await Post.findAll({
+            attributes: ['id', 'title', 'textBody'],
+            include: [
+                {
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id']
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'name', 'email'],
+                    exclude: ['password']
                 }
             ]
-        })
-        .then(PostData => {
-            const posts = PostData.map(post => post.get({ plain: true }));
-            res.render('homepage', { posts, loggedIn: req.session.loggedIn });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
         });
+
+        const posts = postData.map(post => post.get({ plain: true }));
+
+        res.render('homepage', {
+            posts,
+            logged_in: req.session.logged_in
+        });
+    } catch (err) {
+        res.status(500).json(err)
+    }
 });
 
 
-router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
+router.get('/login', async (req, res) => {
+
+    if (req.session.logged_in) {
         res.redirect('/');
         return;
     }
+
     res.render('login');
+
 });
 
 
@@ -48,66 +56,40 @@ router.get('/signup', async (req, res) => {
 });
 
 
+router.get('/post/:id', async (req, res) => {
+    try {
+        const singlePost = await Post.findOne({
+            where: {
+                id: req.params.id
+            },
+            attributes: ['id', 'title', 'textBody'],
+            include: [
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id']
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'name', 'email'],
+                    exclude: ['password']
+                }
+            ]
+        });
 
-router.get('/post/:id', (req, res) => {
-    Post.findOne({
-        where: {
-            id: req.params.id
-        },
-        attributes: [
-            'id',
-            'textBody',
-            'title'
-        ],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-        }
-      ]
-    })
-    .then(PostData => {
-        if(!PostData) {
-            res.status(404).json({messgae: 'No post found with this id'});
+        if (!singlePost) {
+            res.status(404).json({message: "No post found!"});
             return;
         }
-        const post = PostData.get({plain: true});
-        console.log(post);
-        res.render('single-post', {post, loggedIn: req.session.loggedIn});
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
 
-router.get('/post-comments', (req, res) => {
-    Post.findOne({
-        where: {
-            id: req.params.id
-        },
-        attributes: [
-            'id',
-            'textBody',
-            'title'
-        ],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-        }
-      ]
-    })
-    .then(PostData => {
-        if(!PostData) {
-            res.status(404).json({messgae: 'No post found with this id'});
-            return;
-        }
-        const post = PostData.get({plain: true});
-        res.render('post-comments', {post, loggedIn: req.session.loggedIn});
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+        const post = singlePost.get({ plain: true });
+
+        res.render('singlPost', {
+            post,
+            logged_in: req.session.logged_in
+        })
+    } catch (err) {
+        res.status(500).json(err)
+    }
 });
 
 module.exports = router;
