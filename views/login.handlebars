@@ -1,7 +1,7 @@
 <div class="login">
-<h3 class="title pb-3">Log In</h3>
-<form class="card-body" id="loginForm"> {{!-- action="/auth" ?? --}}
+<form class="card-body login-form"> {{!-- action="/auth" ?? --}}
    <div class="form-row">
+        <h3 class="title pb-3">Log In</h3>
         <label for="emailLogin" class="form-label">Email</label>
         <input id="emailLogin" type="text" class="form-input form-control"/>
     </div>
@@ -10,7 +10,7 @@
         <label for="passwordLogin" class="form-label">Password</label>
         <input id="passwordLogin" type="password" class="form-input form-control"/>
     </div>
-    <button type="submit" class="btn login-btn">Login</button>
+    <button type="submit" class="btn text-center signup-btn" id="login-btn">Login</button>
     <button class="btn login-link"><a href="/signup" >Sign up</a></button>
 
 </form>

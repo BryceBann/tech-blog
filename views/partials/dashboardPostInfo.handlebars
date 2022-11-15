@@ -1,9 +1,30 @@
 <div class="container row dashboard-container">
     <div class="card-header dashboard-post">
-       <h4 class="card-title post-title"><a class="link" href="/dashboard/edit/{{id}}">{{title}}</a></h4>
-        <div class="card-body post-body">
-        <p class="card-body post-content">{{content}}</p>
-        <p class="card-text post-author">Posted by <span class="post-username">{{user.username}}</span> on {{format_date created_at}}</p>
+        {{#each posts as |post|}}
+        <h1 class="text-center title-dashboard">Hello, {{user.name}}</h1><br>
+        <div>
+            <a href="/dashboard/edit/{{id}}"><button class="btn signup-btn btn-outline-light btn-lg">Edit
+                    Profile</button></a>
+            <a href="/post/{{github}}" target="_blank"><button class="btn signup-btn btn-outline-light btn-lg">View
+                    Portfolio</button></a>
+            {{/each}}
         </div>
+    </div>
+
+    {{#if posts.length}}
+
+    {{#each posts as |post|}}
+    <div class="container dash-posts">
+        {{> post-info post}}
+
+    </div>
+    {{/each}}
+
+    {{else}}
+    <div class="dash-header text-white d-flex flex-column align-items-center">
+    <h4 class="text-white">No info about you yet! 😔</h4>
+    <a href="/dashboard/create/"><button id="create-post" class="btn signup-btn btn-outline-light btn-lg">Create Profile</button></a>
+    </div>
+    {{/if}}
     </div>
 </div>

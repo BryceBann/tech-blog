@@ -1,11 +1,11 @@
-const loginForm = async (event) => {
+const login = async (event) => {
     event.preventDefault();
 
     const email = document.querySelector('#emailLogin').value.trim();
     const password = document.querySelector('#passwordLogin').Value.trim();
 
     if(email && password) {
-        const response = await fetch('/api/user/login', {
+        const response = await fetch(`/api/user/login`, {
             method: 'POST',
             body: JSON.stringify({
                 email,
@@ -15,10 +15,10 @@ const loginForm = async (event) => {
         });
         if(response.ok) {
             console.log('you are now logged in')
-            document.location.replace('/dashboard')
+            document.location.replace('/')
         }else{
             alert(response.statusText);
         }
     }
 }
-document.querySelector('#loginForm').addEventListener('submit', loginForm);
+document.querySelector('.login-form').addEventListener('submit', login);

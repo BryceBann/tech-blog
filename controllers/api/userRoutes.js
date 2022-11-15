@@ -1,64 +1,66 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 
-router.get('/', (req, res) => {
-    User.findAll({
-            attributes: { exclude: ['[password'] }
-        })
-        .then(UserData => res.json(UserData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
+router.get('/', async (req, res) => {
+    try {
+        const userData = await User.findAll({
+            attributes: { exclude: ['password'] }
         });
+        res.status(200).json(userData)
+    } catch (err) {
+        res.status(500).json(err)
+    }
 });
 
-router.get('/:id', (req, res) => {
-    User.findOne({
-            attributes: { exclude: ['password'] },
+router.get('/:id', async (req, res) => {
+    try {
+        const userData = await User.findOne({
             where: {
                 id: req.params.id
             },
+            attributes: {
+                exclude: ['password']
+            },
             include: [{
+                model: Post,
+                attributes: [
+                    'id',
+                    'title',
+                    'textBody'
+                ]
+            },
+            
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text'],
+                include: {
                     model: Post,
-                    attributes: [
-                        'id',
-                        'title',
-                        'textBody'
-                    ]
-                },
-
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment_text'],
-                    include: {
-                        model: Post,
-                        attributes: ['title']
-                    }
-                },
-                {
-                    model: Post,
-                    attributes: ['title'],
+                    attributes: ['title']
                 }
+            },
+            {
+                model: Post,
+                attributes: ['title'],
+            }
             ]
         })
-        .then(UserData => {
-            if (!UserData) {
-                res.status(404).json({ message: 'No user found with this id' });
-                return;
-            }
-            res.json(UserData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+
+        if(!userData) {
+            res.status(404).json({message: 'No user found'});
+            return;
+        }
+
+        res.status(200).json(userData)
+    } catch (err) {
+        res.status(500).json(err)
+    }
 });
 
 
 router.post('/', (req, res) => {
 
     User.create({
-        username: req.body.username,
+        name: req.body.name,
         email: req.body.email,
         password: req.body.password
     })
@@ -66,7 +68,7 @@ router.post('/', (req, res) => {
     .then(UserData => {
             req.session.save(() => {
                 req.session.user_id = UserData.id;
-                req.session.username = UserData.username;
+                req.session.name = UserData.name;
                 req.session.loggedIn = true;
 
                 res.json(UserData);
@@ -87,7 +89,7 @@ router.post('/login', async (req, res) => {
         })
 
         if(!userData) {
-            res.status(400).json({message:'Incorrect username. Please try again.'});
+            res.status(400).json({message:'Incorrect name. Please try again.'});
             return;
         }
 
