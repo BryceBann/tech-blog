@@ -1,26 +1,31 @@
-const signupHandler = async (event) => {
+const signup = async (event) => {
     event.preventDefault();
 
-    const name = document.querySelector('#userNameSignup').value.trim();
-    const email = document.querySelector('#eamilSignup').value.trim();
-    const password = document.querySelector('#passwordSignup').value.trim();
+    const username = document.querySelector('#username-signup').value.trim();
+    const github = document.querySelector('#github-signup').value.trim();
+    const email = document.querySelector('#email-signup').value.trim();
+    const password = document.querySelector('#password-signup').value.trim();
 
-    if(name && email && password) {
-        const response = await fetch('/api/user', {
+    if (username && email && password) {
+        const response = await fetch('/api/users', {
             method: 'POST',
             body: JSON.stringify({
-                name,
+                username,
+                github,
                 email,
                 password
             }),
-            headers: {'Content-Type': 'application/json'}
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
-        if(response.ok) {
-            console.log('you are now signed up');
+
+        if (response.ok) {
             document.location.replace('/dashboard');
-        }else{
-            alert(response.statusText);
+        } else {
+            alert(response.statusText)
         }
     }
 }
-document.querySelector('.appForm').addEventListener('submit', signupHandler);
+
+document.querySelector('.signup-form').addEventListener('submit', signup)

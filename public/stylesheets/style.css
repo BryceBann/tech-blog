@@ -1,0 +1,57 @@
+body {
+    background-color: rgb(215, 215, 215);
+    background: url(../images/logo.png);
+    background-size: 44.5rem;
+    background-position: top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.6rem;
+    height: 100vh;
+}
+
+hero {
+    height: 12rem;
+    background:transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.navbar {
+    height: 5rem;
+    margin-left: auto;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-family: monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #4c4292;
+    margin-top: 6.5rem;
+}
+
+.img {
+    background-size: 20rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 12rem;
+    width: auto;
+}
+
+
+a,
+p,
+button {
+    color: #26204e;
+    text-decoration: none;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
+}
