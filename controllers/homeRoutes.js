@@ -6,16 +6,19 @@ const { User, Post, Comment } = require('../models');
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
-            attributes: ['id', 'title', 'textBody'],
+            attributes: ['id', 'title', 'post_body', 'date_created'],
             include: [
                 {
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id']
+                    attributes: ['id', 'comment_body', 'post_id', 'user_id', 'date_created'],
+                    include: {
+                        model: User,
+                        attributes: ['username', 'github']
+                    }
                 },
                 {
                     model: User,
-                    attributes: ['id', 'name', 'email'],
-                    exclude: ['password']
+                    attributes: ['username', 'github']
                 }
             ]
         });
@@ -62,16 +65,19 @@ router.get('/post/:id', async (req, res) => {
             where: {
                 id: req.params.id
             },
-            attributes: ['id', 'title', 'textBody'],
+            attributes: ['id', 'title', 'post_body', 'date_created'],
             include: [
                 {
                     model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id']
+                    attributes: ['id', 'comment_body', 'post_id', 'user_id', 'date_created'],
+                    include: {
+                        model: User,
+                        attributes: ['username', 'github']
+                    }
                 },
                 {
                     model: User,
-                    attributes: ['id', 'name', 'email'],
-                    exclude: ['password']
+                    attributes: ['username', 'github']
                 }
             ]
         });
@@ -83,7 +89,7 @@ router.get('/post/:id', async (req, res) => {
 
         const post = singlePost.get({ plain: true });
 
-        res.render('singlPost', {
+        res.render('single-post', {
             post,
             logged_in: req.session.logged_in
         })
