@@ -2,13 +2,13 @@ const newPost = async (event) => {
     event.preventDefault();
 
     const title = document.querySelector('input[name="postTitle"]').value;
-    const textBody = document.querySelector('input[name="content"]').value;
+    const post_body = document.querySelector('input[name="content"]').value;
 
-    const response = await fetch('/api/post', {
+    const response = await fetch('/api/posts', {
         method: 'POST',
         body: JSON.stringify({
             title,
-            textBody
+            post_body,
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -22,4 +22,4 @@ const newPost = async (event) => {
     }
 };
 
-document.querySelector('#newPostForm').addEventListener('click', newPost);
+document.querySelector('#newPostForm').addEventListener('submit', newPost);
