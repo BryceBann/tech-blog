@@ -4,7 +4,7 @@ const newPost = async (event) => {
     const title = document.querySelector('input[name="postTitle"]').value;
     const textBody = document.querySelector('input[name="content"]').value;
 
-    const response = await fetch(`/api/post`, {
+    const response = await fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify({
             title,
@@ -16,7 +16,7 @@ const newPost = async (event) => {
     });
 
     if(response.ok) {
-        document.location.replace('/dashboard');
+        document.location.replace('/');
     }else{
         alert(response.statusText);
     }
