@@ -1,4 +1,4 @@
-{{>postInfo post}}
+{{>post-info post}}
 
     {{#if logged_in}}
         <form class="card-body comment-form" id="comment-form">
@@ -7,7 +7,7 @@
         </form>
     {{/if}}
 
-    {{> comment post.comment}}
+    {{> comments post.comments}}
 
 
 {{#if logged_in}}

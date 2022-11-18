@@ -4,11 +4,11 @@
 <a href="/dashboard/create/"><button id="newPost" class="btn create-btn">+ New tech post</button></a>
 </div>
 
-    {{#if post.length}}
+    {{#if posts.length}}
 
-     {{#each post as |post|}}
+     {{#each posts as |post|}}
      <div class="dashPost">
-     {{>postInfo post}}
+     {{> post-info post}}
      <a href="/dashboard/edit{{post.id}}"><button class="btn edit-btn">Edit post</button></a>
      </div>
      {{/each}}
