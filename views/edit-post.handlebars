@@ -1,16 +1,16 @@
 <h3 class="card-header">Edit tech post</h3>
-<form class="card-body" id="editPost">
+<form class="card-body edit-post" id="editPost">
     <div class="form-row">
-        <label for="postTitle" class="form-label">Title</label>
-        <input name="postTitle" type="text" value="{{post.title}}" class="form-input form-control"/>
+        <label for="post-title" class="form-label">Title</label>
+        <input name="post-title" type="text" value="{{post.title}}" class="form-input form-control"/>
     </div>
 
     <div class="form-row">
-        <label for="post" class="form-label">Tech post</label>
-        <input name="post" type="text" value="{{post.post_body}}" class="form-input form-control"/>
+        <label for="post-body" class="form-label">Tech post</label>
+        <input name="post-body" type="text" value="{{post.post_body}}" class="form-input form-control"/>
     </div>
     <button type="submit" class="btn">Update tech post</button>
-    <button type="button" class="deletePostBtn btn">Delete tech post</button>
+    <button type="button" class="btn delete-btn">Delete tech post</button>
 </form> 
 
 <script src="/javascript/editPost.js"></script>
