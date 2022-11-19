@@ -6,7 +6,7 @@ const newComment = async (event) => {
     const postId = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
 
     if (commentBody) {
-        const response = await fetch('/api/comments', {
+        const response = await fetch('/api/comment', {
             method: 'POST',
             body: JSON.stringify({
                 postId,

@@ -4,6 +4,6 @@
     </div>
         <div class="card-body post-body">
         <p class="card-body post-content">{{post_body}}</p>
-        <p class="card-text post-author">Posted by <span class="post-username">{{user.name}}</span> on {{format_date date_created}}</p>
+         <p class="card-text post-author">Posted by <span class="post-username">{{user.username}}</span>, <a href="/post/{{id}}">{{comment.length}} Comments</a></p> 
     </div>
 </div>
