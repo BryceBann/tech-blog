@@ -1,14 +1,13 @@
 {{> post-info post}}
-
-    {{#if logged_in}}
-        <form class="card-body comment-form" id="comment-form">
-                <textarea id="comment" name="comment-body" class="form-input form-control"></textarea>
+{{> comment comment}}
+{{#if logged_in}}
+    <form class="card-body new-comment" id="comment-form">
+         <div class="commentBody">
+            <textarea id="comment" name="commentBody" class="comment-body"></textarea>
             <button type="submit" class="btn new-comment">submit</button>
-        </form>
-    {{/if}}
-
-{{> comment}}
-    
+        </div>
+    </form>
+{{/if}}
 
 
 {{#if logged_in}}

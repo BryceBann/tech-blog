@@ -1,7 +1,7 @@
 const newComment = async (event) => {
     event.preventDefault();
 
-    const commentBody = document.querySelector('textarea[name="comment-body"]').value.trim();
+    const commentBody = document.querySelector('textarea[name="commentBody"]').value.trim();
 
     const postId = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
 
