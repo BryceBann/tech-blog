@@ -1,18 +1,14 @@
 <div class="comments">
-  {{this.id}}
-  {{!-- {{post}} --}}
-  {{!-- {{id}} --}}
-  {{#each this as |comment|}} 
-  <div class="comment">
-  {{#each comment}}
-        <div class="comment-author">
-             <p>{{comment.id}}</p>
-        </div>
-        <div class="comment_body">
+  {{#each comments as |comment|}}
+    <div class="comment">
+        <div class="card">
+          <div class="comment-author">
+            <p>Commented by:<span class="comment-username">{{comment.user.username}}</span></p>
+          </div>
+          <div class="comment_body">
             <p>{{comment.comment_body}}</p>
-            <p>lmao lol wtf </p>
+          </div>
         </div>
-    {{/each}}
     </div>
-  {{/each}} 
+  {{/each}}
 </div>

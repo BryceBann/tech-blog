@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../../models');
+const { Comment, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // 
@@ -25,7 +25,13 @@ router.get('/:id', async (req, res) => {
         const commentData = await Comment.findByPk({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
         });
 
         if (!commentData) {
@@ -40,7 +46,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-//
+
 router.post('/', withAuth, async (req, res) => {
     try {
         if (req.session) {
